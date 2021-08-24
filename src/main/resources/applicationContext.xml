@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <bean id="myFortuneService"
+          class ="springdemoone.udemy_course_1.HappyFortuneService">
+    </bean>
+    <context:property-placeholder location="application.properties"></context:property-placeholder>
+    <bean id="myCricketCoach"
+          class ="springdemoone.udemy_course_1.CricketCoach">
+        <property name="fortuneService" ref="myFortuneService"/>
+        <property name="email" value="${foo.email}"/>
+        <property name="team" value="${foo.team}"/>
+    </bean>
+    <bean id="myCoach"
+          init-method="doStartStuff"
+          destroy-method="doFinishStuff"
+          class ="springdemoone.udemy_course_1.BaseballCoach">
+        <constructor-arg ref="myFortuneService"/>
+    </bean>
+</beans>
